@@ -1,6 +1,6 @@
 local v14 = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
 local v15 = v14:CreateWindow({
-    Title = "Lunar Hub - Blox Furits",
+    Title = "Lunar Hub - Blox Furits [Free]",
     SubTitle = "By Lily",
     TabWidth = 160,
     Theme = "Dark",
@@ -27,11 +27,17 @@ local v16 = {
     Setting = v15:AddTab({
         Title = "Setting"
     }),
+    Stats = v15:AddTab({
+        Title = "Stats"
+    }),
     Player = v15:AddTab({
         Title = "Player"
     }),
     Teleport = v15:AddTab({
         Title = "Teleport"
+    }),
+    Visual = v15:AddTab({
+        Title = "Visual"
     }),
     Fruit = v15:AddTab({
         Title = "Fruit"
@@ -44,9 +50,6 @@ local v16 = {
     }),
     Misc = v15:AddTab({
         Title = "Misc"
-    })
-    Stats = v15:AddTab({
-        Title = "Stats"
     })
 };
 local v17 = v14.Options;
@@ -2328,6 +2331,7 @@ v25.Rate = 0;
 v25.Speed = NumberRange.new(5, 10);
 v25.Color = ColorSequence.new(Color3.fromRGB(255, 85, 255), Color3.fromRGB(85, 255, 255));
 local v47 = v26:Create(v23, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    Rotation = 360
 });
 v23.MouseButton1Down:Connect(function()
     v25.Rate = 100;
@@ -2509,7 +2513,7 @@ spawn(function()
     end
 end);
 local v51 = v16.Main:AddToggle("ToggleCastleRaid", {
-    Title = "Auto Farm",
+    Title = "Auto",
     Description = "",
     Default = false
 });
@@ -2910,9 +2914,28 @@ if Sea3 then
     end);
 end
 if Sea3 then
-    local v491 = v16.Main:AddSection("Cake Prince And Dough King");
+    local v490 = v16.Main:AddSection("CakePrince");
+    local v491 = v16.Main:AddParagraph({
+        Title = "Status CakePrince",
+        Content = ""
+    });
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
+                else
+                    v491:SetDesc("CakePrince : ✅️");
+                end
+            end);
+        end
+    end);
     local v492 = v16.Main:AddToggle("ToggleCake", {
-        Title = "Cake Prince",
+        Title = "CakePrince",
         Description = "",
         Default = false
     });
@@ -3026,7 +3049,7 @@ if Sea3 then
         end
     end);
     local v495 = v16.Main:AddToggle("ToggleSpawnCake", {
-        Title = "Auto Spawn Cake Prince",
+        Title = "Spawn CakePrince",
         Description = "",
         Default = true
     });
@@ -4201,7 +4224,22 @@ if Sea3 then
             end
         end
     end);
-    local v529 = v16.Main:AddSection("Elite Hunter");
+    local v528 = v16.Main:AddSection("Elite");
+    local v529 = v16.Main:AddParagraph({
+        Title = "Elite Hunter",
+        Content = ""
+    });
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if (game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban")) then
+                    v529:SetDesc("Elite Boss: ✅️ | Killed:  " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
+                else
+                    v529:SetDesc("Elite Boss: ❌️ | Killed: " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
+                end
+            end);
+        end
+    end);
     local v530 = v16.Main:AddToggle("ToggleElite", {
         Title = "Auto Elite Hunter",
         Description = "",
@@ -4253,6 +4291,48 @@ if Sea3 then
 end
 if Sea3 then
     local v531 = v16.Sea:AddSection("Mirage Island");
+    local v532 = v16.Sea:AddParagraph({
+        Title = "Status",
+        Content = ""
+    });
+    task.spawn(function()
+        while task.wait() do
+            pcall(function()
+                local v793 = game:GetService("Lighting").Sky.MoonTextureId;
+                if (v793 == "http://www.roblox.com/asset/?id=9709149431") then
+                    FullMoonStatus = "100%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149052") then
+                    FullMoonStatus = "75%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709143733") then
+                    FullMoonStatus = "50%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709150401") then
+                    FullMoonStatus = "25%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149680") then
+                    FullMoonStatus = "15%";
+                else
+                    FullMoonStatus = "0%";
+                end
+            end);
+        end
+    end);
+    task.spawn(function()
+        while task.wait() do
+            pcall(function()
+                if game.Workspace.Map:FindFirstChild("MysticIsland") then
+                    MirageStatus = "✅️";
+                else
+                    MirageStatus = "❌️";
+                end
+            end);
+        end
+    end);
+    spawn(function()
+        pcall(function()
+            while wait() do
+                v532:SetDesc("Mirage: " .. MirageStatus .. " | FullMonn: " .. FullMoonStatus);
+            end
+        end);
+    end);
     v16.Sea:AddButton({
         Title = "Top Mirage",
         Description = "Auto go to top Mirage island",
@@ -5591,24 +5671,8 @@ v98:OnChanged(function(v284)
     SkillF = v284;
 end);
 v17.ToggleF:SetValue(true);
-local v528 = v16.Status:AddSection("Elite Hunter");
-local v529 = v16.Status:AddParagraph({
-    Title = "Elite Hunter",
-    Content = ""
-});
-spawn(function()
-    while wait() do
-        pcall(function()
-            if (game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban")) then
-                v529:SetDesc("Elite Boss: ✅️ | Killed:  " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
-            else
-                v529:SetDesc("Elite Boss: ❌️ | Killed: " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
-            end
-        end);
-    end
-end);
 local v102 = v16.Status:AddParagraph({
-    Title = "Timer",
+    Title = "Playing",
     Content = ""
 });
 local function v103()
@@ -5616,7 +5680,7 @@ local function v103()
     local v298 = math.floor(v297 / (60 ^ 2)) % 24 ;
     local v299 = math.floor(v297 / 60) % 60 ;
     local v300 = v297 % 60 ;
-    v102:SetDesc(string.format("%02d Day %02d Minutes %02d Seconds", v298, v299, v300));
+    v102:SetDesc(string.format("%02d D-%02d M-%02d S", v298, v299, v300));
 end
 spawn(function()
     while task.wait() do
@@ -5642,39 +5706,8 @@ local v491 = v16.Status:AddParagraph({
         end);
     end
 end);
-local v532 = v16.Status:AddParagraph({
-    Title = "Moon",
-    Content = ""
-});
-task.spawn(function()
-    while task.wait() do
-        pcall(function()
-            local v793 = game:GetService("Lighting").Sky.MoonTextureId;
-            if (v793 == "http://www.roblox.com/asset/?id=9709149431") then
-                FullMoonStatus = "100%";
-            elseif (v793 == "http://www.roblox.com/asset/?id=9709149052") then
-                FullMoonStatus = "75%";
-            elseif (v793 == "http://www.roblox.com/asset/?id=9709143733") then
-                FullMoonStatus = "50%";
-            elseif (v793 == "http://www.roblox.com/asset/?id=9709150401") then
-                FullMoonStatus = "25%";
-            elseif (v793 == "http://www.roblox.com/asset/?id=9709149680") then
-                FullMoonStatus = "15%";
-            else
-                FullMoonStatus = "0%";
-            end
-        end);
-    end
-end);
-spawn(function()
-    pcall(function()
-        while wait() do
-            v532:SetDesc("FullMonn: " .. FullMoonStatus);
-        end
-    end);
-end);
 local v104 = v16.Status:AddParagraph({
-    Title = "Frozen Dimension",
+    Title = "FrozenDimension Spawned",
     Content = ""
 });
 spawn(function()
@@ -5685,28 +5718,6 @@ spawn(function()
             else
                 v104:SetDesc("❌");
             end
-        end
-    end);
-end);
-local v532 = v16.Sea:AddParagraph({
-    Title = "Mirage Island",
-    Content = ""
-});
-task.spawn(function()
-    while task.wait() do
-        pcall(function()
-            if game.Workspace.Map:FindFirstChild("MysticIsland") then
-                MirageStatus = "✅️";
-            else
-                MirageStatus = "❌️";
-            end
-        end);
-    end
-end);
-spawn(function()
-    pcall(function()
-        while wait() do
-            v532:SetDesc("Mirage: " .. MirageStatus);
         end
     end);
 end);
@@ -7621,6 +7632,47 @@ v16.Misc:AddButton({
         game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible = true;
     end
 });
+local v56 = v16.Misc:AddSection("Other");
+local v151 = v16.Misc:AddToggle("ToggleRejoin", {
+    Title = "Auto hop Server",
+    Description = "",
+    Default = true
+});
+v151:OnChanged(function(v381)
+    _G.AutoRejoin = v381;
+end);
+v17.ToggleRejoin:SetValue(true);
+spawn(function()
+    while wait() do
+        if _G.AutoRejoin then
+            getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(v808)
+                if ((v808.Name == "ErrorPrompt") and v808:FindFirstChild("MessageArea") and v808.MessageArea:FindFirstChild("ErrorFrame")) then
+                    game:GetService("TeleportService"):Teleport(game.PlaceId);
+                end
+            end);
+        end
+    end
+end);
+local v56 = v16.Misc:AddSection("Water");
+local function v152()
+    local v382 = game:GetService("Lighting");
+    if v382:FindFirstChild("BaseAtmosphere") then
+        v382.BaseAtmosphere:Destroy();
+    end
+    if v382:FindFirstChild("SeaTerrorCC") then
+        v382.SeaTerrorCC:Destroy();
+    end
+    if v382:FindFirstChild("LightingLayers") then
+        if v382.LightingLayers:FindFirstChild("Atmosphere") then
+            v382.LightingLayers.Atmosphere:Destroy();
+        end
+        wait();
+        if v382.LightingLayers:FindFirstChild("DarkFog") then
+            v382.LightingLayers.DarkFog:Destroy();
+        end
+    end
+    v382.FogEnd = 100000;
+end
 v16.Misc:AddButton({
     Title = "Clear",
     Description = "",
@@ -7629,7 +7681,7 @@ v16.Misc:AddButton({
     end
 });
 local v153 = v16.Misc:AddToggle("ToggleAntiBand", {
-    Title = "Anti Kick",
+    Title = "Band",
     Description = "",
     Default = true
 });
