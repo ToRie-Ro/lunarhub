@@ -47,7 +47,7 @@ local v16 = {
     })
     Stats = v15:AddTab({
         Title = "Stats"
-    }),
+    })
 };
 local v17 = v14.Options;
 local v18 = game.PlaceId;
@@ -5706,7 +5706,7 @@ end);
 spawn(function()
     pcall(function()
         while wait() do
-            v532:SetDesc("Mirage: " .. MirageStatus ..);
+            v532:SetDesc("Mirage: " .. MirageStatus);
         end
     end);
 end);
