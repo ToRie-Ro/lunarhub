@@ -36,9 +36,6 @@ local v16 = {
     Teleport = v15:AddTab({
         Title = "Teleport"
     }),
-    Visual = v15:AddTab({
-        Title = "Visual"
-    }),
     Fruit = v15:AddTab({
         Title = "Fruit"
     }),
@@ -2331,7 +2328,6 @@ v25.Rate = 0;
 v25.Speed = NumberRange.new(5, 10);
 v25.Color = ColorSequence.new(Color3.fromRGB(255, 85, 255), Color3.fromRGB(85, 255, 255));
 local v47 = v26:Create(v23, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-    Rotation = 360
 });
 v23.MouseButton1Down:Connect(function()
     v25.Rate = 100;
@@ -2914,26 +2910,6 @@ if Sea3 then
     end);
 end
 if Sea3 then
-    local v490 = v16.Main:AddSection("CakePrince");
-    local v491 = v16.Main:AddParagraph({
-        Title = "Status CakePrince",
-        Content = ""
-    });
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
-                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
-                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
-                else
-                    v491:SetDesc("CakePrince : ✅️");
-                end
-            end);
-        end
-    end);
     local v492 = v16.Main:AddToggle("ToggleCake", {
         Title = "CakePrince",
         Description = "",
@@ -3633,8 +3609,8 @@ if Sea3 then
             _G.AutoFindMirage = false;
             if not v513 then
                 v14:Notify({
-                    Title = "007",
-                    Content = "Đảo Bí Ẩn Tìm Thấy",
+                    Title = "Lunar Hub",
+                    Content = "Mirage Island Spawned",
                     Duration = 10
                 });
                 v513 = true;
@@ -3728,7 +3704,7 @@ if Sea3 then
             if not v513 then
                 v14:Notify({
                     Title = "...",
-                    Content = "Spawned FrozenDimension",
+                    Content = "Spawned Frozen Dimension",
                     Duration = 10
                 });
                 v513 = true;
@@ -4290,49 +4266,6 @@ if Sea3 then
     end);
 end
 if Sea3 then
-    local v531 = v16.Sea:AddSection("Mirage Island");
-    local v532 = v16.Sea:AddParagraph({
-        Title = "Status",
-        Content = ""
-    });
-    task.spawn(function()
-        while task.wait() do
-            pcall(function()
-                local v793 = game:GetService("Lighting").Sky.MoonTextureId;
-                if (v793 == "http://www.roblox.com/asset/?id=9709149431") then
-                    FullMoonStatus = "100%";
-                elseif (v793 == "http://www.roblox.com/asset/?id=9709149052") then
-                    FullMoonStatus = "75%";
-                elseif (v793 == "http://www.roblox.com/asset/?id=9709143733") then
-                    FullMoonStatus = "50%";
-                elseif (v793 == "http://www.roblox.com/asset/?id=9709150401") then
-                    FullMoonStatus = "25%";
-                elseif (v793 == "http://www.roblox.com/asset/?id=9709149680") then
-                    FullMoonStatus = "15%";
-                else
-                    FullMoonStatus = "0%";
-                end
-            end);
-        end
-    end);
-    task.spawn(function()
-        while task.wait() do
-            pcall(function()
-                if game.Workspace.Map:FindFirstChild("MysticIsland") then
-                    MirageStatus = "✅️";
-                else
-                    MirageStatus = "❌️";
-                end
-            end);
-        end
-    end);
-    spawn(function()
-        pcall(function()
-            while wait() do
-                v532:SetDesc("Mirage: " .. MirageStatus .. " | FullMonn: " .. FullMoonStatus);
-            end
-        end);
-    end);
     v16.Sea:AddButton({
         Title = "Top Mirage",
         Description = "Auto go to top Mirage island",
@@ -5680,26 +5613,57 @@ local function v103()
     local v298 = math.floor(v297 / (60 ^ 2)) % 24 ;
     local v299 = math.floor(v297 / 60) % 60 ;
     local v300 = v297 % 60 ;
-    v102:SetDesc(string.format("%02d D-%02d M-%02d S", v298, v299, v300));
+    v102:SetDesc(string.format("%02d Hour %02d M %02d S", v298, v299, v300));
 end
 spawn(function()
     while task.wait() do
         pcall(v103);
     end
 end);
+    local v532 = v16.Status:AddParagraph({
+        Title = "Moon",
+        Content = ""
+    });
+    task.spawn(function()
+        while task.wait() do
+            pcall(function()
+                local v793 = game:GetService("Lighting").Sky.MoonTextureId;
+                if (v793 == "http://www.roblox.com/asset/?id=9709149431") then
+                    FullMoonStatus = "100%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149052") then
+                    FullMoonStatus = "75%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709143733") then
+                    FullMoonStatus = "50%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709150401") then
+                    FullMoonStatus = "25%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149680") then
+                    FullMoonStatus = "15%";
+                else
+                    FullMoonStatus = "0%";
+                end
+            end);
+        end
+    end);
+    spawn(function()
+        pcall(function()
+            while wait() do
+                v532:SetDesc("FullMonn: " .. FullMoonStatus);
+            end
+        end);
+    end);
 local v491 = v16.Status:AddParagraph({
-        Title = "Staus CakePrince",
+        Title = "Status Cake Prince",
         Content = ""
     });
     spawn(function()
         while wait() do
             pcall(function()
             if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
-                v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
+                v491:SetDesc("Mobs: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
             elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
-                v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
+                v491:SetDesc("Mobs: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
             elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
-                v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
+                v491:SetDesc("Mobs: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
             else
                 v491:SetDesc("CakePrince : ✅️");
             end
@@ -5707,7 +5671,7 @@ local v491 = v16.Status:AddParagraph({
     end
 end);
 local v104 = v16.Status:AddParagraph({
-    Title = "FrozenDimension Spawned",
+    Title = "Frozen Dimension",
     Content = ""
 });
 spawn(function()
@@ -5721,6 +5685,61 @@ spawn(function()
         end
     end);
 end);
+local v105 = v16.Status:AddParagraph({
+    Title = "Prehistoric Island",
+    Content = ""
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
+                v105:SetDesc("✅");
+            else
+                v105:SetDesc("❌");
+            end
+        end
+    end);
+end);
+    local v532 = v16.Status:AddParagraph({
+        Title = "Mirage Island",
+        Content = ""
+    });
+    task.spawn(function()
+        while task.wait() do
+            pcall(function()
+                if game.Workspace.Map:FindFirstChild("MysticIsland") then
+                    MirageStatus = "✅️";
+                else
+                    MirageStatus = "❌️";
+                end
+            end);
+        end
+    end);
+    spawn(function()
+        pcall(function()
+            while wait() do
+                v532:SetDesc("" .. MirageStatus);
+            end
+        end);
+    end);
+    local v499 = v16.Status:AddParagraph({
+        Title = "Kitsune Island",
+        Content = ""
+    });
+    function UpdateKitsune()
+        if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+            v499:SetDesc("✅️");
+        else
+            v499:SetDesc("❌️");
+        end
+    end
+    spawn(function()
+        pcall(function()
+            while wait() do
+                UpdateKitsune();
+            end
+        end);
+    end);
 local v105 = v16.Status:AddInput("Input", {
     Title = "Job ID",
     Default = "",
@@ -7634,7 +7653,7 @@ v16.Misc:AddButton({
 });
 local v56 = v16.Misc:AddSection("Other");
 local v151 = v16.Misc:AddToggle("ToggleRejoin", {
-    Title = "Auto hop Server",
+    Title = "Rejoin",
     Description = "",
     Default = true
 });
@@ -7681,7 +7700,7 @@ v16.Misc:AddButton({
     end
 });
 local v153 = v16.Misc:AddToggle("ToggleAntiBand", {
-    Title = "Band",
+    Title = "Anti Kick",
     Description = "",
     Default = true
 });
