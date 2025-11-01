@@ -1,3 +1,4 @@
+local v13 = loadstring(game:HttpGet("https://raw.githubusercontent.com/ToRie-Ro/lunarhub/refs/heads/main/offline.lua"))();
 local v14 = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();
 local v15 = v14:CreateWindow({
     Title = "Lunar Hub - Blox Furits [Free]",
@@ -37,7 +38,7 @@ local v16 = {
         Title = "Teleport"
     }),
     Fruit = v15:AddTab({
-        Title = "Fruit"
+        Title = "Raid And Fruit"
     }),
     Raid = v15:AddTab({
         Title = "Raid"
