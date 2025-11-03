@@ -15,6 +15,9 @@ local v16 = {
     Status = v15:AddTab({
         Title = "Status And Server"
     }),
+    Misc = v15:AddTab({
+        Title = "LocalPlayer"
+    }),
     Main = v15:AddTab({
         Title = "Auto Farm"
     }),
@@ -37,17 +40,15 @@ local v16 = {
         Title = "Teleport"
     }),
     Fruit = v15:AddTab({
-        Title = "Raid And Fruit"
+        Title = "Fruit"
     }),
-    Raid = v15:AddTab({
-        Title = "Raid"
+    ESP = v15:AddTab({
+        Title = "ESP"
     }),
     Race = v15:AddTab({
         Title = "Race V4"
     }),
-    Misc = v15:AddTab({
-        Title = "Misc"
-    })
+
 };
 local v17 = v14.Options;
 local v18 = game.PlaceId;
@@ -2509,7 +2510,7 @@ spawn(function()
     end
 end);
 local v51 = v16.Main:AddToggle("ToggleCastleRaid", {
-    Title = "Auto",
+    Title = "Auto Castle Raid",
     Description = "",
     Default = false
 });
@@ -5934,49 +5935,6 @@ spawn(function()
         end
     end
 end);
-local v56 = v16.Player:AddSection("Other");
-local v115 = v16.Player:AddToggle("ToggleNoClip", {
-    Title = "No Clip",
-    Description = "",
-    Default = true
-});
-v115:OnChanged(function(v312)
-    _G.LOf = v312;
-end);
-v17.ToggleNoClip:SetValue(true);
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").Stepped:Connect(function()
-            if _G.LOf then
-                for v868, v869 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                    if v869:IsA("BasePart") then
-                        v869.CanCollide = false;
-                    end
-                end
-            end
-        end);
-    end);
-end);
-local v116 = v16.Player:AddToggle("ToggleWalkonWater", {
-    Title = "Walk in Water",
-    Description = "",
-    Default = true
-});
-v116:OnChanged(function(v313)
-    _G.WalkonWater = v313;
-end);
-v17.ToggleWalkonWater:SetValue(true);
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if _G.WalkonWater then
-                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000, 112, 1000);
-            else
-                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000, 80, 1000);
-            end
-        end);
-    end
-end);
 local v118 = v16.Teleport:AddSection("World");
 local v119 = v16.Teleport:AddToggle("ToggleAutoSea2", {
     Title = "Auto ho to Sea 2",
@@ -6510,556 +6468,6 @@ spawn(function()
         end
     end
 end);
-local v56 = v16.Fruit:AddSection("Esp");
-local v130 = v16.Fruit:AddToggle("ToggleEspPlayer", {
-    Title = "Esp Player",
-    Description = "",
-    Default = false
-});
-v130:OnChanged(function(v345)
-    ESPPlayer = v345;
-    UpdatePlayerChams();
-end);
-v17.ToggleEspPlayer:SetValue(false);
-local v131 = v16.Fruit:AddToggle("ToggleEspFruit", {
-    Title = "Fruit",
-    Description = "",
-    Default = false
-});
-v131:OnChanged(function(v346)
-    DevilFruitESP = v346;
-    while DevilFruitESP do
-        wait();
-        UpdateDevilChams();
-    end
-end);
-v17.ToggleEspFruit:SetValue(false);
-local v132 = v16.Fruit:AddToggle("ToggleEspIsland", {
-    Title = "Esp Island",
-    Description = "",
-    Default = false
-});
-v132:OnChanged(function(v347)
-    IslandESP = v347;
-    while IslandESP do
-        wait();
-        UpdateIslandESP();
-    end
-end);
-v17.ToggleEspIsland:SetValue(false);
-local v133 = v16.Fruit:AddToggle("ToggleEspFlower", {
-    Title = "Esp Folwer",
-    Description = "",
-    Default = false
-});
-v133:OnChanged(function(v348)
-    FlowerESP = v348;
-    UpdateFlowerChams();
-end);
-v17.ToggleEspFlower:SetValue(false);
-spawn(function()
-    while wait() do
-        if FlowerESP then
-            UpdateFlowerChams();
-        end
-        if DevilFruitESP then
-            UpdateDevilChams();
-        end
-        if ChestESP then
-            UpdateChestChams();
-        end
-        if ESPPlayer then
-            UpdatePlayerChams();
-        end
-        if RealFruitESP then
-            UpdateRealFruitChams();
-        end
-    end
-end);
-local v134 = v16.Fruit:AddToggle("ToggleEspRealFruit", {
-    Title = "Esp Fruit",
-    Description = "",
-    Default = false
-});
-v134:OnChanged(function(v349)
-    RealFruitEsp = v349;
-    while RealFruitEsp do
-        wait();
-        UpdateRealFruitEsp();
-    end
-end);
-v17.ToggleEspRealFruit:SetValue(false);
-function UpdateRealFruitEsp()
-    for v548, v549 in pairs(game.Workspace.AppleSpawner:GetChildren()) do
-        if v549:IsA("Tool") then
-            if RealFruitEsp then
-                if not v549.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1066 = Instance.new("BillboardGui", v549.Handle);
-                    v1066.Name = "NameEsp" .. Number ;
-                    v1066.ExtentsOffset = Vector3.new(0, 1, 0);
-                    v1066.Size = UDim2.new(1, 200, 1, 30);
-                    v1066.Adornee = v549.Handle;
-                    v1066.AlwaysOnTop = true;
-                    local v1073 = Instance.new("TextLabel", v1066);
-                    v1073.Font = Enum.Font.GothamSemibold;
-                    v1073.FontSize = "Size14";
-                    v1073.TextWrapped = true;
-                    v1073.Size = UDim2.new(1, 0, 1, 0);
-                    v1073.TextYAlignment = "Top";
-                    v1073.BackgroundTransparency = 1;
-                    v1073.TextStrokeTransparency = 0.5;
-                    v1073.TextColor3 = Color3.fromRGB(255, 0, 0);
-                    v1073.Text = v549.Name .. " \n" .. v20((game:GetService("Players").LocalPlayer.Character.Head.Position - v549.Handle.Position).Magnitude / 3) .. " Distance" ;
-                else
-                    v549.Handle["NameEsp" .. Number ].TextLabel.Text = v549.Name .. " " .. v20((game:GetService("Players").LocalPlayer.Character.Head.Position - v549.Handle.Position).Magnitude / 3) .. " Distance" ;
-                end
-            elseif v549.Handle:FindFirstChild("NameEsp" .. Number) then
-                v549.Handle:FindFirstChild("NameEsp" .. Number):Destroy();
-            end
-        end
-    end
-    for v550, v551 in pairs(game.Workspace.PineappleSpawner:GetChildren()) do
-        if v551:IsA("Tool") then
-            if RealFruitEsp then
-                if not v551.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1085 = Instance.new("BillboardGui", v551.Handle);
-                    v1085.Name = "NameEsp" .. Number ;
-                    v1085.ExtentsOffset = Vector3.new(0, 1, 0);
-                    v1085.Size = UDim2.new(1, 200, 1, 30);
-                    v1085.Adornee = v551.Handle;
-                    v1085.AlwaysOnTop = true;
-                    local v1092 = Instance.new("TextLabel", v1085);
-                    v1092.Font = Enum.Font.GothamSemibold;
-                    v1092.FontSize = "Size14";
-                    v1092.TextWrapped = true;
-                    v1092.Size = UDim2.new(1, 0, 1, 0);
-                    v1092.TextYAlignment = "Top";
-                    v1092.BackgroundTransparency = 1;
-                    v1092.TextStrokeTransparency = 0.5;
-                    v1092.TextColor3 = Color3.fromRGB(255, 174, 0);
-                    v1092.Text = v551.Name .. " \n" .. v20((game:GetService("Players").LocalPlayer.Character.Head.Position - v551.Handle.Position).Magnitude / 3) .. " Distance" ;
-                else
-                    v551.Handle["NameEsp" .. Number ].TextLabel.Text = v551.Name .. " " .. v20((game:GetService("Players").LocalPlayer.Character.Head.Position - v551.Handle.Position).Magnitude / 3) .. " Distance" ;
-                end
-            elseif v551.Handle:FindFirstChild("NameEsp" .. Number) then
-                v551.Handle:FindFirstChild("NameEsp" .. Number):Destroy();
-            end
-        end
-    end
-    for v552, v553 in pairs(game.Workspace.BananaSpawner:GetChildren()) do
-        if v553:IsA("Tool") then
-            if RealFruitEsp then
-                if not v553.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1104 = Instance.new("BillboardGui", v553.Handle);
-                    v1104.Name = "NameEsp" .. Number ;
-                    v1104.ExtentsOffset = Vector3.new(0, 1, 0);
-                    v1104.Size = UDim2.new(1, 200, 1, 30);
-                    v1104.Adornee = v553.Handle;
-                    v1104.AlwaysOnTop = true;
-                    local v1111 = Instance.new("TextLabel", v1104);
-                    v1111.Font = Enum.Font.GothamSemibold;
-                    v1111.FontSize = "Size14";
-                    v1111.TextWrapped = true;
-                    v1111.Size = UDim2.new(1, 0, 1, 0);
-                    v1111.TextYAlignment = "Top";
-                    v1111.BackgroundTransparency = 1;
-                    v1111.TextStrokeTransparency = 0.5;
-                    v1111.TextColor3 = Color3.fromRGB(251, 255, 0);
-                    v1111.Text = v553.Name .. " \n" .. v20((game:GetService("Players").LocalPlayer.Character.Head.Position - v553.Handle.Position).Magnitude / 3) .. " Distance" ;
-                else
-                    v553.Handle["NameEsp" .. Number ].TextLabel.Text = v553.Name .. " " .. v20((game:GetService("Players").LocalPlayer.Character.Head.Position - v553.Handle.Position).Magnitude / 3) .. " Distance" ;
-                end
-            elseif v553.Handle:FindFirstChild("NameEsp" .. Number) then
-                v553.Handle:FindFirstChild("NameEsp" .. Number):Destroy();
-            end
-        end
-    end
-end
-local v135 = v16.Fruit:AddToggle("ToggleIslandMirageEsp", {
-    Title = "Exp Mirage",
-    Description = "",
-    Default = false
-});
-v135:OnChanged(function(v350)
-    IslandMirageEsp = v350;
-    while IslandMirageEsp do
-        wait();
-        UpdateIslandMirageEsp();
-    end
-end);
-v17.ToggleIslandMirageEsp:SetValue(false);
-function isnil(v351)
-    return v351 == nil ;
-end
-local function v20(v352)
-    return math.floor(tonumber(v352) + 0.5);
-end
-Number = math.random(1, 1000000);
-function UpdateIslandMirageEsp()
-    for v554, v555 in pairs(game:GetService("Workspace")['_WorldOrigin'].Locations:GetChildren()) do
-        pcall(function()
-            if MirageIslandESP then
-                if (v555.Name == "Mirage Island") then
-                    if not v555:FindFirstChild("NameEsp") then
-                        local v1347 = Instance.new("BillboardGui", v555);
-                        v1347.Name = "NameEsp";
-                        v1347.ExtentsOffset = Vector3.new(0, 1, 0);
-                        v1347.Size = UDim2.new(1, 200, 1, 30);
-                        v1347.Adornee = v555;
-                        v1347.AlwaysOnTop = true;
-                        local v1353 = Instance.new("TextLabel", v1347);
-                        v1353.Font = Enum.Font.Code;
-                        v1353.FontSize = Enum.FontSize.Size14;
-                        v1353.TextWrapped = true;
-                        v1353.Size = UDim2.new(1, 0, 1, 0);
-                        v1353.TextYAlignment = Enum.TextYAlignment.Top;
-                        v1353.BackgroundTransparency = 1;
-                        v1353.TextStrokeTransparency = 0.5;
-                        v1353.TextColor3 = Color3.fromRGB(80, 245, 245);
-                    else
-                        v555['NameEsp'].TextLabel.Text = v555.Name .. "   \n" .. v20((game:GetService("Players").LocalPlayer.Character.Head.Position - v555.Position).Magnitude / 3) .. " M" ;
-                    end
-                end
-            elseif v555:FindFirstChild("NameEsp") then
-                v555:FindFirstChild("NameEsp"):Destroy();
-            end
-        end);
-    end
-end
-local v136 = {
-    "Flame",
-    "Ice",
-    "Quake",
-    "Light",
-    "Dark",
-    "Spider",
-    "Rumble",
-    "Magma",
-    "Buddha",
-    "Sand",
-    "Phoenix",
-    "Dough"
-};
-local v137 = v16.Raid:AddDropdown("DropdownRaid", {
-    Title = "Chip",
-    Description = "",
-    Values = v136,
-    Multi = false,
-    Default = 1
-});
-v137:SetValue(SelectChip);
-v137:OnChanged(function(v353)
-    SelectChip = v353;
-end);
-local v138 = v16.Raid:AddToggle("ToggleBuy", {
-    Title = "Buy Chip Raid",
-    Description = "",
-    Default = false
-});
-v138:OnChanged(function(v354)
-    _G.Auto_Buy_Chips_Dungeon = v354;
-end);
-v17.ToggleBuy:SetValue(false);
-spawn(function()
-    while wait() do
-        if _G.Auto_Buy_Chips_Dungeon then
-            pcall(function()
-                local v805 = {
-                    [1] = "RaidsNpc",
-                    [2] = "Select",
-                    [3] = SelectChip
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v805));
-            end);
-        end
-    end
-end);
-local v139 = v16.Raid:AddToggle("ToggleStart", {
-    Title = "Start",
-    Description = "",
-    Default = false
-});
-v139:OnChanged(function(v355)
-    _G.Auto_StartRaid = v355;
-end);
-v17.ToggleStart:SetValue(false);
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Auto_StartRaid then
-                if (game:GetService("Players")['LocalPlayer'].PlayerGui.Main.Timer.Visible == false) then
-                    if (not game:GetService("Workspace")['_WorldOrigin'].Locations:FindFirstChild("Island 1") and (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip"))) then
-                        if Sea2 then
-                            Tween2(CFrame.new(- 6438.73535, 250.645355, - 4501.50684));
-                            local v1547 = {
-                                [1] = "SetSpawnPoint"
-                            };
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1547));
-                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector);
-                        elseif Sea3 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 5075.50927734375, 314.5155029296875, - 3150.0224609375));
-                            Tween2(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
-                            local v1656 = {
-                                [1] = "SetSpawnPoint"
-                            };
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1656));
-                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector);
-                        end
-                    end
-                end
-            end
-        end);
-    end
-end);
-local v140 = v16.Raid:AddToggle("ToggleNextIsland", {
-    Title = "Auto Raid",
-    Description = "",
-    Default = false
-});
-v140:OnChanged(function(v356)
-    AutoNextIsland = v356;
-    if not v356 then
-        _G.AutoNear = false;
-    end
-end);
-v17.ToggleNextIsland:SetValue(false);
-spawn(function()
-    local v357 = {};
-    while task.wait() do
-        if AutoNextIsland then
-            pcall(function()
-                local v806 = game.Players.LocalPlayer.Character;
-                if (v806 and v806:FindFirstChild("HumanoidRootPart")) then
-                    local v900 = game:GetService("Workspace")['_WorldOrigin'].Locations;
-                    local v901 = v806.HumanoidRootPart.Position;
-                    if (((v901 - Vector3.new(- 6438.73535, 250.645355, - 4501.50684)).Magnitude < 1) or ((v901 - Vector3.new(- 5017.40869, 314.844055, - 2823.0127)).Magnitude < 1)) then
-                        v357 = {};
-                    end
-                    if v900:FindFirstChild("Island 1") then
-                        _G.AutoNear = true;
-                    end
-                    if (v900:FindFirstChild("Island 2") and not v357["Island 2"]) then
-                        Tween(v900:FindFirstChild("Island 2").CFrame);
-                        v357["Island 2"] = true;
-                        AutoNextIsland = false;
-                        wait();
-                        AutoNextIsland = true;
-                    elseif (v900:FindFirstChild("Island 3") and not v357["Island 3"]) then
-                        Tween(v900:FindFirstChild("Island 3").CFrame);
-                        v357["Island 3"] = true;
-                        AutoNextIsland = false;
-                        wait();
-                        AutoNextIsland = true;
-                    elseif (v900:FindFirstChild("Island 4") and not v357["Island 4"]) then
-                        Tween(v900:FindFirstChild("Island 4").CFrame);
-                        v357["Island 4"] = true;
-                        AutoNextIsland = false;
-                        wait();
-                        AutoNextIsland = true;
-                    elseif (v900:FindFirstChild("Island 5") and not v357["Island 5"]) then
-                        Tween(v900:FindFirstChild("Island 5").CFrame);
-                        v357["Island 5"] = true;
-                        AutoNextIsland = false;
-                        wait();
-                        AutoNextIsland = true;
-                    end
-                end
-            end);
-        end
-    end
-end);
-local v141 = v16.Raid:AddToggle("ToggleAwake", {
-    Title = "Awaken Fruit",
-    Description = "",
-    Default = false
-});
-v141:OnChanged(function(v358)
-    AutoAwakenAbilities = v358;
-end);
-v17.ToggleAwake:SetValue(false);
-spawn(function()
-    while task.wait() do
-        if AutoAwakenAbilities then
-            pcall(function()
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener", "Awaken");
-            end);
-        end
-    end
-end);
-local v142 = v16.Raid:AddToggle("ToggleGetFruit", {
-    Title = "Fruit Raid",
-    Description = "Chose the fruit UnCommon",
-    Default = false
-});
-v142:OnChanged(function(v359)
-    _G.Autofruit = v359;
-end);
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Autofruit then
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Rocket-Rocket"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Spin-Spin"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Chop-Chop"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Spring-Spring"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Bomb-Bomb"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Smoke-Smoke"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Spike-Spike"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Flame-Flame"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Falcon-Falcon"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Ice-Ice"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Sand-Sand"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Dark-Dark"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Ghost-Ghost"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Diamond-Diamond"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Light-Light"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Rubber-Rubber"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-                local v807 = {
-                    [1] = "LoadFruit",
-                    [2] = "Barrier-Barrier"
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v807));
-            end
-        end);
-    end
-end);
-if Sea2 then
-    v16.Raid:AddButton({
-        Title = ".",
-        Description = "",
-        Callback = function()
-            Tween2(CFrame.new(- 6438.73535, 250.645355, - 4501.50684));
-        end
-    });
-elseif Sea3 then
-    v16.Raid:AddButton({
-        Title = ".",
-        Description = "",
-        Callback = function()
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 5075.50927734375, 314.5155029296875, - 3150.0224609375));
-            Tween2(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
-        end
-    });
-end
-local v56 = v16.Raid:AddSection("Law");
-local v143 = v16.Raid:AddToggle("ToggleLaw", {
-    Title = "Buy Chip Law",
-    Description = "",
-    Default = false
-});
-v143:OnChanged(function(v360)
-    Auto_Law = v360;
-end);
-v17.ToggleLaw:SetValue(false);
-spawn(function()
-    pcall(function()
-        while wait() do
-            if Auto_Law then
-                if (not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Microchip") and not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") and not game:GetService("ReplicatedStorage"):FindFirstChild("Order")) then
-                    wait();
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward", "Microchip", "1");
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward", "Microchip", "2");
-                end
-            end
-        end
-    end);
-end);
-spawn(function()
-    pcall(function()
-        while wait() do
-            if Auto_Law then
-                if (not game:GetService("Workspace").Enemies:FindFirstChild("Order") and not game:GetService("ReplicatedStorage"):FindFirstChild("Order")) then
-                    if (game:GetService("Players").LocalPlayer.Character:FindFirstChild("Microchip") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Microchip")) then
-                        fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main.ClickDetector);
-                    end
-                end
-                if (game:GetService("ReplicatedStorage"):FindFirstChild("Order") or game:GetService("Workspace").Enemies:FindFirstChild("Order")) then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Order") then
-                        for v1468, v1469 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v1469.Name == "Order") then
-                                repeat
-                                    wait(_G.Fast_Delay);
-                                    AttackNoCoolDown();
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    Tween(v1469.HumanoidRootPart.CFrame * Pos);
-                                    v1469.HumanoidRootPart.CanCollide = false;
-                                    v1469.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                until not v1469.Parent or (v1469.Humanoid.Health <= 0) or (Auto_Law == false)
-                            end
-                        end
-                    elseif game:GetService("ReplicatedStorage"):FindFirstChild("Order") then
-                        Tween(CFrame.new(- 6217.2021484375, 28.047645568848, - 5053.1357421875));
-                    end
-                end
-            end
-        end
-    end);
-end);
 v16.Race:AddButton({
     Title = "Teleport",
     Description = "",
@@ -7084,6 +6492,32 @@ v16.Race:AddButton({
     end
 });
 local v56 = v16.Race:AddSection("Race");
+local function v152()
+    local v382 = game:GetService("Lighting");
+    if v382:FindFirstChild("BaseAtmosphere") then
+        v382.BaseAtmosphere:Destroy();
+    end
+    if v382:FindFirstChild("SeaTerrorCC") then
+        v382.SeaTerrorCC:Destroy();
+    end
+    if v382:FindFirstChild("LightingLayers") then
+        if v382.LightingLayers:FindFirstChild("Atmosphere") then
+            v382.LightingLayers.Atmosphere:Destroy();
+        end
+        wait();
+        if v382.LightingLayers:FindFirstChild("DarkFog") then
+            v382.LightingLayers.DarkFog:Destroy();
+        end
+    end
+    v382.FogEnd = 100000;
+end
+v16.Race:AddButton({
+    Title = "Clear",
+    Description = "",
+    Callback = function()
+        v152();
+    end
+});
 v16.Race:AddButton({
     Title = "Go to door",
     Description = "",
@@ -7672,33 +7106,49 @@ spawn(function()
         end
     end
 end);
-local v56 = v16.Misc:AddSection("Water");
-local function v152()
-    local v382 = game:GetService("Lighting");
-    if v382:FindFirstChild("BaseAtmosphere") then
-        v382.BaseAtmosphere:Destroy();
-    end
-    if v382:FindFirstChild("SeaTerrorCC") then
-        v382.SeaTerrorCC:Destroy();
-    end
-    if v382:FindFirstChild("LightingLayers") then
-        if v382.LightingLayers:FindFirstChild("Atmosphere") then
-            v382.LightingLayers.Atmosphere:Destroy();
-        end
-        wait();
-        if v382.LightingLayers:FindFirstChild("DarkFog") then
-            v382.LightingLayers.DarkFog:Destroy();
-        end
-    end
-    v382.FogEnd = 100000;
-end
-v16.Misc:AddButton({
-    Title = "Clear",
+local v56 = v16.Misc:AddSection("Other");
+local v115 = v16.Misc:AddToggle("ToggleNoClip", {
+    Title = "No Clip",
     Description = "",
-    Callback = function()
-        v152();
-    end
+    Default = true
 });
+v115:OnChanged(function(v312)
+    _G.LOf = v312;
+end);
+v17.ToggleNoClip:SetValue(true);
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.LOf then
+                for v868, v869 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v869:IsA("BasePart") then
+                        v869.CanCollide = false;
+                    end
+                end
+            end
+        end);
+    end);
+end);
+local v116 = v16.Misc:AddToggle("ToggleWalkonWater", {
+    Title = "Walk in Water",
+    Description = "",
+    Default = true
+});
+v116:OnChanged(function(v313)
+    _G.WalkonWater = v313;
+end);
+v17.ToggleWalkonWater:SetValue(true);
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.WalkonWater then
+                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000, 112, 1000);
+            else
+                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000, 80, 1000);
+            end
+        end);
+    end
+end);
 local v153 = v16.Misc:AddToggle("ToggleAntiBand", {
     Title = "Anti Kick",
     Description = "",
